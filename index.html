@@ -12,11 +12,12 @@
     <!-- c07aabbdcff4e34c9266fb1d043ad86c -->
      <!-- https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API key} -->
 </head>
-<body class=" min-h-screen font-sans text-gray-800" id="bodybg">
+<body class="font-sans text-gray-800" id="bodybg">
     <div class="container  shadow-lg rounded-xl">
         <div class="search">
                 <input type="text" id="city_input" placeholder="Enter city name" class="px-4 py-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-blue-500" />
                <button id="btn" onclick="getweather()">Search</button>
+               <div id="popup">Please Enter city name</div>
         </div>
         <div class="location ">
             <div class="locationdetail">
