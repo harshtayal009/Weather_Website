@@ -12,6 +12,7 @@ body
     width: 100vw;
     height: 100vh;
     background-repeat: no-repeat;
+    background-size: cover;
 }
 .container
 {
@@ -20,6 +21,7 @@ body
     display: flex;
     flex-direction: column;
     margin:100px auto ;
+    background: rgba(255, 255, 255, 0.3);
 }
 .search
 {
@@ -27,6 +29,7 @@ body
     width: 100%;
     gap: 10px;
     margin-bottom: 10px;
+    margin-top: 10px;
 }
 .search input
 {
@@ -56,6 +59,19 @@ body
 {
     background-color: white;
     color: black;
+}
+#popup
+{
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background-color: #ff4d4d;
+    color: white;
+    border-radius: 4px;
+    animation: fade 0.3s ease-in-out;
 }
 .location
 {
@@ -87,7 +103,7 @@ body
 {
     text-align: left;
     font-size: 1em;
-
+    margin-bottom: 5px;
 }
 .imgbox
 {
