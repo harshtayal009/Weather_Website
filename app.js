@@ -13,6 +13,10 @@ async function getweather()
         let weatherDesc = data.weather[0].description;
         let humidity = data.main.humidity;
         let windSpeed = data.wind.speed;
+        let dateObj = new Date();
+        let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        let dateStr = dateObj.toLocaleDateString(undefined, options);
+        document.getElementById("date").innerText = dateStr;
         let pressure = data.main.pressure;
         let iconCode = data.weather[0].icon;
         let temp = Math.round(data.main.temp - 273.15); 
@@ -27,7 +31,40 @@ async function getweather()
         document.getElementById("humidity").classList.add("card");
         document.getElementById("wind_speed").classList.add("card");
         document.getElementById("pressure").classList.add("card");
+        let status = data.weather[0].main;
+        changeBg(status);
+        reset();
+        
     } catch (error) {
         console.log('There has been a problem with your fetch operation:', error);
+    }    
+}   
+function changeBg(status) {
+    if (status === 'Clouds') {
+        document.body.style.backgroundImage = 'url(img/clouds.jpg)';
+    } else if (status === 'Rain') {
+        document.body.style.backgroundImage = 'url(img/rainy.jpg)';
+    } else if (status === 'Clear') {
+        document.body.style.backgroundImage = 'url(img/clear.jpg)';
     }
-}    
+    else if (status === 'Snow') {
+        document.body.style.backgroundImage = 'url(img/snow.jpg)';
+    }
+    else if (status === 'Sunny') {
+        document.body.style.backgroundImage = 'url(img/sunny.jpg)';
+    } else if (status === 'Thunderstorm') {
+        document.body.style.backgroundImage = 'url(img/thunderstrom.jpg)';
+    } else if (status === 'Drizzle') {
+        document.body.style.backgroundImage = 'url(img/drizzle.jpg)';
+    } else if (status === 'Mist' || status === 'Haze' || status === 'Fog') {
+        document.body.style.backgroundImage = 'url(img/mist.jpg)';
+    }
+
+    else {
+        document.body.style.backgroundImage = 'url(img/bg.jpg)';
+    }
+}  
+function reset() {
+    let input = document.getElementById('city_input');
+    input.value = "";
+}  
