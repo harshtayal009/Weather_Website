@@ -8,11 +8,11 @@
     <title>Weather Website</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     <!-- c07aabbdcff4e34c9266fb1d043ad86c -->
      <!-- https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API key} -->
 </head>
-<body class=" min-h-screen font-sans text-gray-800">
+<body class=" min-h-screen font-sans text-gray-800" id="bodybg">
     <div class="container  shadow-lg rounded-xl">
         <div class="search">
                 <input type="text" id="city_input" placeholder="Enter city name" class="px-4 py-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-blue-500" />
@@ -23,6 +23,7 @@
                   <div class="locationabout">
                        <h2 id="city_name"></h2>
                        <p id="weather_desc"></p>
+                       <p id="date"></p>
                   </div>
                   <div class="imgbox">
                       <img id="weather_icon" src="" alt="weather_icon">
