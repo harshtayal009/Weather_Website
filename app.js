@@ -10,13 +10,14 @@ async function getweather()
                 popup.style.display="none"
             },3000);
         }
-        let url=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=c07aabbdcff4e34c9266fb1d043ad86c`;
+        let url=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=c07aabbdcff4e34c9266fb1d043ad86c&units=metric`;
         let response = await fetch(url);
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
-        
         let data = await response.json();
+        if (data.cod==404)
+            {
+                showerror("Invalid location! City not found");
+                return;
+            } 
         console.log(data);
         let cityName = data.name;
         let weatherDesc = data.weather[0].description;
@@ -28,7 +29,11 @@ async function getweather()
         document.getElementById("date").innerText = dateStr;
         let pressure = data.main.pressure;
         let iconCode = data.weather[0].icon;
-        let temp = Math.round(data.main.temp - 273.15); 
+        let temp = data.main.temp; 
+        if (temp > 40) 
+        {
+            alert("It's too hot outside! Stay hydrated and avoid going out during peak hours.");
+        }
         document.getElementById("city_name").innerText = cityName;
         document.getElementById("temp").innerHTML ="Temp<br> "+ temp + "°C";
         document.getElementById("weather_desc").innerText = weatherDesc;
@@ -41,7 +46,7 @@ async function getweather()
         document.getElementById("wind_speed").classList.add("card");
         document.getElementById("pressure").classList.add("card");
         let status = data.weather[0].main;
-        ///changeBg(status);
+        changeBg(status);
         reset();
         
     } catch (error) {
@@ -50,23 +55,23 @@ async function getweather()
 }   
 function changeBg(status) {
     if (status === 'Clouds') {
-        document.body.style.backgroundImage = 'url(img/clouds.jpg)';
+        document.body.style.backgroundImage = 'url(img/cloud.webp)';
     } else if (status === 'Rain') {
-        document.body.style.backgroundImage = 'url(img/rainy.jpg)';
+        document.body.style.backgroundImage = 'url(img/rain.webp)';
     } else if (status === 'Clear') {
-        document.body.style.backgroundImage = 'url(img/clear.jpg)';
+        document.body.style.backgroundImage = 'url(img/clear.webp)';
     }
     else if (status === 'Snow') {
-        document.body.style.backgroundImage = 'url(img/snow.jpg)';
+        document.body.style.backgroundImage = 'url(img/snow.webp)';
     }
     else if (status === 'Sunny') {
-        document.body.style.backgroundImage = 'url(img/sunny.jpg)';
+        document.body.style.backgroundImage = 'url(img/sunny.webp)';
     } else if (status === 'Thunderstorm') {
-        document.body.style.backgroundImage = 'url(img/thunderstrom.jpg)';
+        document.body.style.backgroundImage = 'url(img/thunderstrom.webp)';
     } else if (status === 'Drizzle') {
-        document.body.style.backgroundImage = 'url(img/drizzle.jpg)';
+        document.body.style.backgroundImage = 'url(img/drizzle.webp)';
     } else if (status === 'Mist' || status === 'Haze' || status === 'Fog') {
-        document.body.style.backgroundImage = 'url(img/mist.jpg)';
+        document.body.style.backgroundImage = 'url(img/fog.webp)';
     }
 
     else {
@@ -77,3 +82,12 @@ function reset() {
     let input = document.getElementById('city_input');
     input.value = "";
 }  
+function showerror(message) 
+{
+    let errbox=document.getElementById("errorbox");
+    errbox.style.display="block";
+    errbox.innerText=message;
+    setTimeout(() => {
+        errbox.style.display="none";
+    }, 3000);
+}
