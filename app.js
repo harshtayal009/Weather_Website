@@ -2,11 +2,20 @@ async function getweather()
 {
     try {
         let city = document.getElementById("city_input").value;
+        let pop=document.getElementById("popup");
+        if(city.trim()=="")
+        {
+            pop.style.display="block";
+            setTimeout(()=>{
+                popup.style.display="none"
+            },3000);
+        }
         let url=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=c07aabbdcff4e34c9266fb1d043ad86c`;
         let response = await fetch(url);
         if (!response.ok) {
             throw new Error('Network response was not ok ' + response.statusText);
         }
+        
         let data = await response.json();
         console.log(data);
         let cityName = data.name;
@@ -32,7 +41,7 @@ async function getweather()
         document.getElementById("wind_speed").classList.add("card");
         document.getElementById("pressure").classList.add("card");
         let status = data.weather[0].main;
-        changeBg(status);
+        ///changeBg(status);
         reset();
         
     } catch (error) {
