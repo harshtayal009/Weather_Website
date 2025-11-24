@@ -22,7 +22,8 @@ body
     display: flex;
     flex-direction: column;
     margin:100px auto ;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(86, 79, 79, 0.3);
+    box-shadow: 2px 2px 5px white;
 }
 .search
 {
@@ -78,6 +79,20 @@ body
     text-align: center;
     font-weight: 900;
     line-height: 200px;
+}
+#errorbox
+{
+    display:none;
+    position: absolute;
+    background: #ff4d4b;
+    color: white;
+    top:200px;
+    left: 400px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 1.2em;
+    font-weight: 700;
 }
 .location
 {
