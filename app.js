@@ -19,6 +19,7 @@ async function getweather()
                 return;
             } 
         console.log(data);
+
         let cityName = data.name;
         let weatherDesc = data.weather[0].description;
         let humidity = data.main.humidity;
@@ -46,6 +47,7 @@ async function getweather()
         document.getElementById("wind_speed").classList.add("card");
         document.getElementById("pressure").classList.add("card");
         let status = data.weather[0].main;
+        getForecast(city);
         changeBg(status);
         reset();
         
@@ -70,7 +72,7 @@ function changeBg(status) {
         document.body.style.backgroundImage = 'url(img/thunderstrom.webp)';
     } else if (status === 'Drizzle') {
         document.body.style.backgroundImage = 'url(img/drizzle.webp)';
-    } else if (status === 'Mist' || status === 'Haze' || status === 'Fog') {
+    } else if (status === 'Mist' || status === 'Haze' || status === 'Fog' || status === 'Smoke' || status === 'Dust' || status === 'Sand') {
         document.body.style.backgroundImage = 'url(img/fog.webp)';
     }
 
@@ -90,4 +92,52 @@ function showerror(message)
     setTimeout(() => {
         errbox.style.display="none";
     }, 3000);
+}
+function getForecast(city)
+{
+  fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=c07aabbdcff4e34c9266fb1d043ad86c&units=metric`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+
+      const castDiv = document.getElementById("castdiv");
+      castDiv.innerHTML = ""; // clear previous data
+
+      // Group 40 items by date
+      let dailyData = {};
+
+      data.list.forEach(item => {
+        let date = item.dt_txt.split(" ")[0]; // "2024-04-24"
+        if (!dailyData[date]) {
+          dailyData[date] = [];
+        }
+        dailyData[date].push(item);
+      });
+
+      // Now pick 5 days
+      let days = Object.keys(dailyData).slice(0, 5);
+
+      days.forEach(date => {
+        // find data close to 12:00:00
+        let dayItems = dailyData[date];
+        let best = dayItems.find(item => item.dt_txt.includes("12:00:00")) || dayItems[0];
+
+        let icon = best.weather[0].icon;
+        let temp = best.main.temp;
+        let wind = best.wind.speed;
+        let humidity = best.main.humidity;
+
+        let card = `
+          <div class="castcard">
+            <h4>${date}</h4>
+            <img src="https://openweathermap.org/img/wn/${icon}.png" />
+            <p>Temp: ${temp}°C</p>
+            <p>Wind: ${wind} M/S</p>
+            <p>Humidity: ${humidity}%</p>
+          </div>
+        `;
+
+        castDiv.innerHTML += card;
+      });
+    })
 }
