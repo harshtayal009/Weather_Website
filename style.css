@@ -1,3 +1,7 @@
+:root
+{
+    --secondary-color: #918c8c54;
+}
 *
 {
     padding: 0;
@@ -6,72 +10,81 @@
     color: white;
     font-family: Arial, Helvetica, sans-serif;
 }
+/* body style */
 body
 {
     background: linear-gradient(to right, #032f4d, #6facef);
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     background-repeat: no-repeat;
     background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+/* container style */
 .container
 {
     position: relative;
-    width: 100%;
-    height: 90vh;
+    width: 90%;
+    height: auto;
+    min-height: 500px;
     display: flex;
+    margin: 20px;
+    gap: 20px;
     flex-direction: column;
-    margin:100px auto ;
-    background: rgba(86, 79, 79, 0.3);
     box-shadow: 2px 2px 5px white;
     border-radius: 10px;
 }
+/* search div style */
 .search
 {
     display: flex;
     width: 100%;
     gap: 10px;
-    margin-bottom: 10px;
     margin-top: 10px;
 }
 .search input
 {
-    min-width: 50vw;
+    width: 50%;
+    max-width: 900px;
     height: 30px;
     border-radius: 10px;
     padding: 0 20px;
-    font-size: 18px;
+    font-size: 1em;
     margin-left: 20px;
 }
 .search button
 {
     height: 30px;
     border-radius: 10px;
-    background-color: transparent;
+    background: rgba(99, 93, 93, 0.3);
     color: white;
-    font-size: 18px;
+    font-size: 1em;
     cursor: pointer;
     border: 1px solid white;
     padding: 5px;
+    line-height: 0.5;
 }
 #btn
 {
     transition: all 0.4s ease;
 }
+/* hover effect on button */
 #btn:hover
 {
     background-color: white;
     color: black;
 }
+/* popup style  */
 #popup
 {
     display: none;
     position: absolute;
-    width: 50%;
-    height: 200px;
+    width: 300px;
+    height: 150px;
     top: 100px;
-    left:300px;
-    margin-top: 8px;
+    margin: 0 auto;
     padding: 8px;
     background-color: #ff4d4d;
     color: white;
@@ -79,80 +92,83 @@ body
     font-size: 1.2em;
     text-align: center;
     font-weight: 900;
-    line-height: 200px;
+    line-height: 150px;
 }
+/* error style */
 #errorbox
 {
     display:none;
     position: absolute;
     background: #ff4d4b;
     color: white;
-    top:200px;
-    left: 400px;
+    top:100px;
+    margin: 0 auto;
     padding: 10px;
+    width: 250px;
+    height: 100px;
     text-align: center;
     border-radius: 5px;
     font-size: 1.2em;
     font-weight: 700;
 }
+/* location style */
 .location
 {
     width: 100%;
-    height: 50vh;
+    height: auto;
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 .locationdetail
 {
-    height: 20vh;
+    height: auto;
     display: flex;
     justify-content: space-between;
-    width: 100%;
-    margin-bottom: 25px;
+    width: 70%;
 }
 .locationabout
 {
     width: 200px;
-    margin-left: 22px;
 }
-.locationdetail h2
+.locationabout h2
 {
     font-weight: bold;
-    text-align: left;
+    text-align: center;
     font-size: 2.5em;
 }
-.locationdetail p
+.locationabout p
 {
-    text-align: left;
+    text-align: center;
     font-size: 1em;
     margin-bottom: 5px;
 }
 .imgbox
 {
-    margin-right: 100px;
     width: 100px;
-    height: 100px;
+    height: auto;
 }
 .imgbox img
 {
     width: 100%;
     height: 100%;
-    border-radius: 10px;
-    text-align:left ;
+    text-align:center ;
 }
+/* style to search location weather */
 .locationweather
 {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    height: 20vh;
+    height: auto;
     width: 100%;
     justify-content: space-around;
     align-items: center;
+    padding: 10px 0;
 }
+/* style to card which is dynamically apply through js */
 .card
 {
-    /* background-color: yellow; */
     width: 200px;
     height: 100px;
     text-align: center;
@@ -161,38 +177,53 @@ body
     border-radius: 10px;
     border: none;
     box-shadow: 1px 1px 2px white;
-    background-color: transparent;
+    background-color:var(--secondary-color);
     padding: 5px;
     transition: all 0.4s ease ;
 }
+/* hover effect on card */
 .card:hover
 {
     box-shadow: 2px 2px 5px white;
     transform: scale(1.1);
 }
+/* style 5 day forecastdiv */
 .fivecast
 {
     width: 100%;
     height: 30vh;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-evenly;
     border-radius: 10px;
     gap:10px;
+    padding: 10px;
 }
 
 .castcard
 {
     width: 150px;
     min-height: 100px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     font-weight: 600;
     font-size: 1em;
     border-radius: 10px;
     border: none;
     box-shadow: 1px 1px 2px white;
-    background-color: transparent;
+    background-color: var(--secondary-color);
     padding: 5px;
     transition: all 0.4s ease ;
+}
+.castcard img
+{
+    text-align: center;
+}
+/* hover effect on castcard */
+.castcard:hover
+{
+    box-shadow: 2px 2px 5px white;
+    transform: scale(1.1);
 }

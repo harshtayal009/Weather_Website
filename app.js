@@ -1,25 +1,29 @@
+// async function 
 async function getweather()
 {
+    // try catch block
     try {
         let city = document.getElementById("city_input").value;
         let pop=document.getElementById("popup");
+        // if condition for if user enter empty input then popup msg show
         if(city.trim()=="")
         {
             pop.style.display="block";
             setTimeout(()=>{
-                popup.style.display="none"
+                pop.style.display="none"
             },3000);
         }
+        // operweathermap api url
         let url=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=c07aabbdcff4e34c9266fb1d043ad86c&units=metric`;
         let response = await fetch(url);
-        let data = await response.json();
+        let data = await response.json();//convert into object
+        //if city not found error msg show       
         if (data.cod==404)
             {
                 showerror("Invalid location! City not found");
                 return;
-            } 
+            }     
         console.log(data);
-
         let cityName = data.name;
         let weatherDesc = data.weather[0].description;
         let humidity = data.main.humidity;
@@ -31,6 +35,7 @@ async function getweather()
         let pressure = data.main.pressure;
         let iconCode = data.weather[0].icon;
         let temp = data.main.temp; 
+        //if temp goes above from 40 then alert msg show
         if (temp > 40) 
         {
             alert("It's too hot outside! Stay hydrated and avoid going out during peak hours.");
@@ -38,7 +43,7 @@ async function getweather()
         document.getElementById("city_name").innerText = cityName;
         document.getElementById("temp").innerHTML ="Temp<br> "+ temp + "°C";
         document.getElementById("weather_desc").innerText = weatherDesc;
-        document.getElementById("weather_icon").src =`https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+        document.getElementById("imgbox").innerHTML=`<img src=https://openweathermap.org/img/wn/${iconCode}@2x.png>`
         document.getElementById("humidity").innerHTML = "Humidity<br> "+ humidity + "%";
         document.getElementById("wind_speed").innerHTML = "Wind<br> " + windSpeed + " m/s";
         document.getElementById("pressure").innerHTML = "Pressure<br> " + pressure + " hPa";
@@ -47,14 +52,18 @@ async function getweather()
         document.getElementById("wind_speed").classList.add("card");
         document.getElementById("pressure").classList.add("card");
         let status = data.weather[0].main;
+        //getForecast fxn use for 5 day forecast weather
         getForecast(city);
+        //changeBg fxn use to change bg of body as per weather condition
         changeBg(status);
+        //reset fxn use to reset input value
         reset();
         
     } catch (error) {
         console.log('There has been a problem with your fetch operation:', error);
     }    
 }   
+// this function changes the background image based on the weather status
 function changeBg(status) {
     if (status === 'Clouds') {
         document.body.style.backgroundImage = 'url(img/cloud.webp)';
@@ -80,6 +89,7 @@ function changeBg(status) {
         document.body.style.backgroundImage = 'url(img/bg.jpg)';
     }
 }  
+// this function resets the input field after fetching the weather data
 function reset() {
     let input = document.getElementById('city_input');
     input.value = "";
@@ -93,6 +103,7 @@ function showerror(message)
         errbox.style.display="none";
     }, 3000);
 }
+// This function fetches the 5-day weather forecast for the given city
 function getForecast(city)
 {
   fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=c07aabbdcff4e34c9266fb1d043ad86c&units=metric`)
@@ -116,7 +127,13 @@ function getForecast(city)
 
       // Now pick 5 days
       let days = Object.keys(dailyData).slice(0, 5);
-
+      let container=document.getElementsByClassName('container')[0];
+      let div =document.getElementById("castdiv");
+      let head=document.createElement("h2");
+      head.innerHTML="5 Day Forecast";
+      head.style.cssText=`font:weight:bold;
+      font-size:20px;`;
+      container.insertBefore(head,div);
       days.forEach(date => {
         // find data close to 12:00:00
         let dayItems = dailyData[date];

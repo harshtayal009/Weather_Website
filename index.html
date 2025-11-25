@@ -6,40 +6,49 @@
     <meta name="author" content="Harsh Tayal">
     <meta name="description" content="Weather website by using HTML , CSS , JS and TailwindCSS">
     <title>Weather Website</title>
+    <!-- link for style.css -->
     <link rel="stylesheet" href="style.css">
+    <!-- link for tailwindcss -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
-    <!-- c07aabbdcff4e34c9266fb1d043ad86c -->
-     <!-- https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API key} -->
+    <!-- link for github -->
+    <link rel="github" href="https://github.com/harshtayal009/Weather_Website">
+    <!-- link for fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- API KEY =>c07aabbdcff4e34c9266fb1d043ad86c -->
 </head>
 <body class="font-sans text-gray-800" id="bodybg">
+    <!-- popup div is used to show msg when user enter empty input -->
+    <div id="popup">Please Enter city name!</div>
+    <!-- errorbox is used for invalid ame of city -->
+    <div id="errorbox"></div>
+    <!-- container -->
     <div class="container  shadow-lg rounded-xl">
+        <!-- div for input and btn -->
         <div class="search">
-                <input type="text" id="city_input" placeholder="Enter city name" class="px-4 py-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-blue-500" />
+               <input type="text" id="city_input" placeholder="Enter city name" class="px-4 py-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-blue-500" />
                <button id="btn" onclick="getweather()">Search</button>
-               <div id="popup">Please Enter city name!</div>
-               <div id="errorbox"></div>
         </div>
+        <!-- div for location weather details -->
         <div class="location ">
-            <div class="locationdetail">
+             <div class="locationdetail">
                   <div class="locationabout">
                        <h2 id="city_name"></h2>
                        <p id="weather_desc"></p>
                        <p id="date"></p>
                   </div>
-                  <div class="imgbox">
-                      <img id="weather_icon" src="" alt="weather_icon">
-                  </div>
-            </div>
-            <div class="locationweather">
+                  <div class="imgbox" id="imgbox"></div>
+             </div>
+             <div class="locationweather">
                 <div id="tempcard"><p id="temp"></p></div>
                 <div id="humcard"><p id="humidity"></p></div>
                 <div id="windcard"><p id="wind_speed"></p></div>
                 <div id="presscard"><p id="pressure"></p></div>
             </div>
         </div>
-        <div class="fivecast " style="background-color: lightcoral;">cast</div>
+        <!-- 5 day forecast -->
+        <div class="fivecast" id="castdiv"></div>
     </div>
+    <!-- link for js file -->
     <script src="app.js"></script>  
 </body>
 </html>
